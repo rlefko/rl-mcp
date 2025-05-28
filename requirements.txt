@@ -31,3 +31,31 @@ typing-extensions==4.13.2
 typing-inspection==0.4.1
 uvicorn==0.34.2
 watchfiles==1.0.5
+
+# Vector search and embeddings
+openai==1.58.1
+numpy==2.2.1
+scikit-learn==1.6.0
+sentence-transformers==3.3.1
+
+# Stock market data
+yahooquery==2.4.1
+alpha-vantage==3.0.0
+finnhub-python==2.4.20
+
+# Caching
+redis==5.2.1
+python-redis-cache==1.0.0
+
+# Testing
+pytest==8.3.4
+pytest-asyncio==0.25.0
+pytest-mock==3.14.0
+httpx==0.28.1
+pytest-cov==5.0.0
+
+# Additional utilities
+aiofiles==24.1.0
+feedparser==6.0.11
+beautifulsoup4==4.12.3
+requests==2.32.3
