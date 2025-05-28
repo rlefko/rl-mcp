@@ -257,7 +257,7 @@ async def stock_health_check(db: Session = Depends(get_session)) -> dict:
             "service": "stock",
             "total_entries": total_entries,
             "cache_stats": cache_stats.model_dump(),
-            "timestamp": "2024-01-01T00:00:00Z",  # Would use actual timestamp
+            "timestamp": datetime.now(timezone.utc).isoformat(),
         }
     except Exception as e:
         raise HTTPException(
