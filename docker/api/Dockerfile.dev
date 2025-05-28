@@ -1,0 +1,17 @@
+FROM python:3.12.7-bookworm AS build
+
+# Set Python environment variables
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# Install py reqs
+RUN pip3 install --upgrade pip
+RUN mkdir -p /app
+WORKDIR /app
+COPY ./requirements.txt /app/requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
+
+# Initialize the app in dev mode
+COPY . /app/
+EXPOSE 8000
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

@@ -1,0 +1,56 @@
+name: rl_mcp
+services:
+    api:
+        networks:
+            - rl-mcp-network
+        build:
+            context: ./
+            dockerfile: ./docker/api/Dockerfile.dev
+        ports:
+            - "8000:8000"
+        volumes:
+            - ./:/app/
+        environment:
+            DB_HOST: "db"
+            DB_PORT: "5432"
+            DB_USER: "adminuser"
+            DB_PASS: "adminpass"
+            DB_NAME: "rl_mcp_db"
+            PYTHONDONTWRITEBYTECODE: "1"
+            PYTHONUNBUFFERED: "1"
+        depends_on:
+            db:
+                condition: service_healthy
+    db:
+        image: postgres:latest
+        networks:
+            - rl-mcp-network
+        ports:
+            - "5432:5432"
+        restart: always
+        shm_size: 128mb
+        environment:
+            POSTGRES_USER: adminuser
+            POSTGRES_PASSWORD: adminpass
+            POSTGRES_DB: rl_mcp_db
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U adminuser -d rl_mcp_db"]
+            interval: 5s
+            timeout: 5s
+            retries: 5
+            start_period: 5s
+
+    adminer:
+        image: adminer
+        restart: always
+        networks:
+            - rl-mcp-network
+        ports:
+            - "8080:8080"
+        depends_on:
+            db:
+                condition: service_healthy
+
+networks:
+    rl-mcp-network:
+        name: rl-mcp-network

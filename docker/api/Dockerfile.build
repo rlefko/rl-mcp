@@ -1,0 +1,17 @@
+FROM python:3.12.7-bookworm AS build
+
+# Set Python environment variables
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# Install Python Requirements
+RUN pip3 install --upgrade pip
+RUN mkdir -p /app
+WORKDIR /app
+COPY ./requirements.txt /app/requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
+
+# Initialize the app
+COPY . /app/
+EXPOSE 8000
+CMD ["./docker/api/startup.sh"]
