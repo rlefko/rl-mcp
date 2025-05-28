@@ -22,6 +22,45 @@ RL-MCP is a robust **Model Context Protocol server** designed to provide AI mode
 - 🎨 **Interactive Docs** - Auto-generated API documentation
 - 🛠️ **Development Tools** - Pre-commit hooks, linting, and formatting
 
+## 📈 Stock Market Intelligence
+
+> 🚀 **Transform your applications with AI-powered financial intelligence**
+
+RL-MCP includes a comprehensive **Stock Market Intelligence API** that combines cutting-edge AI with real-time financial data:
+
+### 🧠 **AI-Powered Capabilities**
+- **🔍 Vector Search**: Semantic search across news, analysis, and market data using advanced NLP
+- **📊 Sentiment Analysis**: Real-time sentiment scoring for news and market content
+- **🤖 Smart Analysis**: AI-driven stock analysis with confidence scoring and recommendations
+- **🎯 Relevance Scoring**: Intelligent content ranking and filtering
+
+### 💹 **Real-Time Market Data**
+- **📈 Live Pricing**: Current stock prices with change indicators and market metrics
+- **📰 News Intelligence**: Latest financial news with sentiment analysis from multiple sources
+- **🌍 Market Overview**: Comprehensive market summaries with top movers and trends
+- **🔥 Trending Analysis**: Most active and discussed stocks based on data volume
+
+### ⚡ **High-Performance Architecture**
+- **🚀 Intelligent Caching**: Multi-layer caching for lightning-fast responses
+- **🔄 Background Processing**: Async data ingestion and processing
+- **📊 Performance Monitoring**: Built-in health checks and cache statistics
+- **🛡️ Enterprise-Ready**: Secure, scalable, and production-ready
+
+### 🎯 **Use Cases**
+- **🤖 AI Trading Assistants** - Portfolio analysis and trading signals
+- **📊 Financial Research** - Market research and competitive intelligence
+- **📱 Investment Apps** - Smart notifications and educational content
+- **🏢 Enterprise Systems** - Risk management and client reporting
+
+### 📚 **Comprehensive Documentation**
+
+Explore our detailed stock market API documentation:
+
+- **📊 [Stock API Overview](docs/stock/README.md)** - Complete guide to stock market features
+- **🔍 [Vector Search Guide](docs/stock/vector-search.md)** - Advanced semantic search capabilities
+- **💡 [Use Cases & Examples](docs/stock/use-cases.md)** - Real-world applications and code samples
+- **🔗 [API Reference](docs/stock/api-reference.md)** - Complete endpoint documentation
+
 ### 🚀 Future Vision
 
 This MCP server is designed to be the **foundation** for AI-powered applications that need:
@@ -41,6 +80,7 @@ This MCP server is designed to be the **foundation** for AI-powered applications
 - **🔄 Migrations**: Alembic
 - **🧪 Code Quality**: Black, isort, pylint, pre-commit hooks
 - **📚 Documentation**: Auto-generated OpenAPI/Swagger docs
+- **🧠 AI/ML**: Sentence Transformers, Vector Search, Sentiment Analysis
 
 ## 🚀 Quick Start
 
@@ -80,6 +120,7 @@ docker compose up -d
 Your services will be available at:
 - 🌐 **API Server**: http://localhost:8000
 - 📚 **API Docs**: http://localhost:8000/docs
+- 📈 **Stock API**: http://localhost:8000/v1/stock
 - 🗄️ **Database Admin**: http://localhost:8080 (Adminer)
 
 #### 🐍 Local Development
@@ -106,6 +147,29 @@ All API endpoints require authentication. Include your auth token in requests:
 
 ```bash
 curl -H "Authorization: Bearer YOUR_TOKEN" http://localhost:8000/v1/item
+```
+
+### 📈 Stock API Quick Example
+
+```bash
+# Search for Tesla battery technology insights
+curl -X POST "http://localhost:8000/v1/stock/search" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "Tesla battery technology innovations",
+    "symbols": ["TSLA"],
+    "similarity_threshold": 0.8,
+    "limit": 10
+  }'
+
+# Get current Apple stock price
+curl -H "Authorization: Bearer YOUR_TOKEN" \
+     "http://localhost:8000/v1/stock/price/AAPL"
+
+# Get market summary
+curl -H "Authorization: Bearer YOUR_TOKEN" \
+     "http://localhost:8000/v1/stock/market/summary"
 ```
 
 ## 🗄️ Database Management
@@ -159,9 +223,16 @@ rl-mcp/
 │   ├── 📁 api/               # API layer
 │   │   └── 📁 v1/           # API version 1
 │   │       ├── 📁 base/     # Base models and tables
-│   │       └── 📁 item/     # Item management endpoints
+│   │       ├── 📁 item/     # Item management endpoints
+│   │       └── 📁 stock/    # 📈 Stock market intelligence
+│   │           ├── 📁 services/  # AI services (vector search, market data)
+│   │           ├── 📄 routes_stock.py     # Stock API endpoints
+│   │           ├── 📄 models_stock.py     # Data models
+│   │           └── 📄 controllers_stock.py # Business logic
 │   ├── 📁 databases/        # Database configuration
 │   └── 📄 main.py          # Application entry point
+├── 📁 docs/                 # 📚 Comprehensive documentation
+│   └── 📁 stock/           # Stock API documentation
 ├── 📁 docker/               # Docker configurations
 ├── 📁 migrations/           # Database migrations
 ├── 📁 scripts/             # Utility scripts
@@ -188,6 +259,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 Having issues? 🤔
 
 - 📖 Check the [API Documentation](http://localhost:8000/docs)
+- 📈 Explore [Stock API Documentation](docs/stock/README.md)
 - 🐛 Open an [Issue](https://github.com/rlefko/rl-mcp/issues)
 - 💬 Start a [Discussion](https://github.com/rlefko/rl-mcp/discussions)
 
@@ -198,5 +270,7 @@ Having issues? 🤔
 **🚀 Built with ❤️ for the future of AI-powered applications**
 
 *Ready to revolutionize how AI models interact with your data? Let's build something amazing together!* ✨
+
+**📈 Featuring comprehensive stock market intelligence with AI-powered semantic search, real-time data, and intelligent caching** 🤖💹
 
 </div>
